@@ -1,6 +1,6 @@
 # Introduction
 
-This is a docker file for a container including:
-+ Ubuntu Xenial
+An Ethereum Geth Node including
+
 + Ethereum Geth Client
 + SOLC solidity compiler
