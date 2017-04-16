@@ -1,5 +1,5 @@
 FROM ubuntu:xenial
-MAINTAINER Alexandre Roba
+MAINTAINER HappyPrivacy
 
 ENV DEBIAN_FRONTEND noninteractive
 
