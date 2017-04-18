@@ -1,9 +1,10 @@
 FROM happyprivacy/ethereum-geth
 MAINTAINER HappyPrivacy
 
-ADD startdevnet.sh /
+ADD configure.sh /
+RUN chmod +x configure.sh
+RUN ./configure.sh
 
-ADD startdevnet.sh /
-RUN chmod +x startdevnet.sh
-RUN ./startdevnet.sh
+ENTRYPOINT ["geth", "--datadir", ".", "--nodiscover", "--maxpeers", "0", "--identity", ""HappyPrivacy"", "--rpc", "--rpcaddr", ""0.0.0.0"", "--rpccorsdomain", ""*"", "--rpcapi", ""db,eth,net,web3,personal"", "--dev", "--password", "~/.accountpassword", "--mine", "--minerthreads", "1" ]
+
 
