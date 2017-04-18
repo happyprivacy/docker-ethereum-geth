@@ -1,10 +1,28 @@
 FROM happyprivacy/ethereum-geth
 MAINTAINER HappyPrivacy
 
-ADD configure.sh /
-RUN chmod +x configure.sh
-RUN ./configure.sh
+RUN mkdir /node
 
-ENTRYPOINT ["geth", "--datadir", ".", "--nodiscover", "--maxpeers", "0", "--identity", ""HappyPrivacy"", "--rpc", "--rpcaddr", ""0.0.0.0"", "--rpccorsdomain", ""*"", "--rpcapi", ""db,eth,net,web3,personal"", "--dev", "--password", "~/.accountpassword", "--mine", "--minerthreads", "1" ]
+RUN mkdir /node/config
+
+WORKDIR /node
+
+ADD genesis.json /node/config
+
+ADD password.txt /node/config
+
+RUN geth --datadir . --password config/password.txt account new > /node/config/accountprimary.txt
+
+RUN cat /node/config/accountprimary.txt
+
+ADD updategenesisfile.sh /node/config
+RUN chmod +x /node/config/updategenesisfile.sh
+RUN /node/config/updategenesisfile.sh
+
+RUN cat /node/config/genesis.json
+
+RUN geth  --datadir . --dev init config/genesis.json
+
+ENTRYPOINT ["geth", "--datadir", ".", "--nodiscover", "--maxpeers", "0", "--identity", ""HappyPrivacy"", "--rpc", "--rpcaddr", ""0.0.0.0"", "--rpccorsdomain", ""*"", "--rpcapi", ""db,eth,net,web3,personal"", "--dev", "--password", "config/password.txt", "--mine", "--minerthreads", "1" ]
 
 
