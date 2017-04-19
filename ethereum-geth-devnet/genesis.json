@@ -1,6 +1,13 @@
 {
-  "gasLimit": "2100000",
-  "difficulty": "1024",
+  "config": {
+    "chainId": 15,
+    "homesteadBlock": 0
+  },
+  "gasLimit": "210000",
+  "difficulty": "20000",
   "alloc": {
+    "ADDRESS": {
+      "balance": "100000000000"
+    }
   }
 }
