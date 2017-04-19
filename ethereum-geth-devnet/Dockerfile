@@ -21,8 +21,8 @@ RUN /node/config/updategenesisfile.sh
 
 RUN cat /node/config/genesis.json
 
-RUN geth  --datadir . --dev init config/genesis.json
+RUN geth  --datadir . init config/genesis.json
 
-ENTRYPOINT ["geth", "--datadir", ".", "--nodiscover", "--maxpeers", "0", "--identity", ""HappyPrivacy"", "--rpc", "--rpcaddr", ""0.0.0.0"", "--rpccorsdomain", ""*"", "--rpcapi", ""db,eth,net,web3,personal"", "--dev", "--password", "config/password.txt", "--mine", "--minerthreads", "1" ]
+ENTRYPOINT ["geth", "--datadir", ".", "--nodiscover", "--maxpeers", "0", "--identity", "HappyPrivacy", "--rpc", "--rpcaddr", "0.0.0.0", "--rpccorsdomain", "*", "--rpcapi", "db,eth,net,web3,personal", "--password", "config/password.txt", "--mine", "--minerthreads", "1" ]
 
 
